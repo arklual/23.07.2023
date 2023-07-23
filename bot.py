@@ -38,8 +38,8 @@ async def status(message: types.Message):
     bot_to_status= message.text.split(' ')[-1]
     status = os.popen(f'systemctl status {bot_to_status}').read()
     for i in status.splitlines():
-        if i.startswith('Active'):
-            await message.answer(i)
+        if i.strip().startswith('Active'):
+            await message.answer(i.strip())
             return
 
 
