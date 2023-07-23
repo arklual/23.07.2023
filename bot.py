@@ -23,15 +23,21 @@ async def start(message: types.Message):
 
 @dp.message_handler(lambda m: m.text.startswith('/stop'))
 async def stop(message: types.Message):
+    if message.text == '/stop':
+        await message.answer('Вы не ввели название бота')
+        return
     bot_to_stop = message.text.split(' ')[-1]
     os.system(f'systemctl stop {bot_to_stop}')
     await message.answer(f'{bot_to_stop} остановлен')
 
 @dp.message_handler(lambda m: m.text.startswith('/status'))
 async def status(message: types.Message):
+    if message.text == '/status':
+        await message.answer('Вы не ввели название бота')
+        return
     bot_to_status= message.text.split(' ')[-1]
     status = os.popen(f'systemctl status {bot_to_status}').read()
-    await message.answer(status)
+    await message.answer(status.split('\n')[0])
 
 
 
