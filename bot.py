@@ -24,7 +24,7 @@ async def start(message: types.Message):
 @dp.message_handler(lambda m: m.text.startswith('/stop'))
 async def stop(message: types.Message):
     bot_to_stop = message.text.split(' ')[-1]
-    os.system(f'systemctl start {bot_to_stop}')
+    os.system(f'systemctl stop {bot_to_stop}')
     await message.answer(f'{bot_to_stop} остановлен')
 
 @dp.message_handler(lambda m: m.text.startswith('/status'))
